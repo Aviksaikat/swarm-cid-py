@@ -1,0 +1,49 @@
+[tool.poetry]
+name = "swarm-cid-py"
+version = "0.1.0"
+description = "Utility library written in Python to convert Swarm hex references into Swarm CIDs"
+authors = ["SAIKAT KARMAKAR <saikickkarma@protonmail.com>"]
+readme = "README.md"
+packages = [{ include = "swarm_cid_py", from = "src" }]
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.pytest.project]
+name = "swarm_cid_py"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.pytest.ini_options]
+# addopts = [
+#     "--import-mode=importlib",
+#]
+# NOTE: Prevents the ape plugin from activating on our tests
+# addopts = "-p no:ape_test"
+
+
+[tool.black]
+line-length = 100
+target-version = ['py39', 'py310', 'py311']
+include = '\.pyi?$'
+
+[tool.isort]
+line_length = 100
+force_grid_wrap = 0
+include_trailing_comma = true
+multi_line_output = 3
+use_parentheses = true
+
+[tool.mdformat]
+number = true
+
+[[tool.mypy.overrides]]
+module = "eth_keys.*"
+ignore_missing_imports = true
+
+# * not working so defined in setup.cfg
+# [tool.flake8]
+# line-length = 100
+# exclude = ["__pycache__", ".venv/*"]
