@@ -8,6 +8,7 @@ packages = [{ include = "swarm_cid_py", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
+py-multiformats-cid = "^0.4.4"
 
 [tool.pytest.project]
 name = "swarm_cid_py"
