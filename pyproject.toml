@@ -4,14 +4,15 @@ version = "0.1.0"
 description = "Utility library written in Python to convert Swarm hex references into Swarm CIDs"
 authors = ["SAIKAT KARMAKAR <saikickkarma@protonmail.com>"]
 readme = "README.md"
-packages = [{ include = "swarm_cid_py", from = "src" }]
+packages = [{ include = "swarm_cid", from = "src" }]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 py-multiformats-cid = "^0.4.4"
+eth-ape = "^0.6.24"
 
 [tool.pytest.project]
-name = "swarm_cid_py"
+name = "swarm_cid"
 
 [build-system]
 requires = ["poetry-core"]

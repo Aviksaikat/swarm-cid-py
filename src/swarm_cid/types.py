@@ -1,4 +1,4 @@
-from typing import NewType
+from typing import Dict, NewType, Union
 
 # Constants
 KECCAK_256_CODEC = 0x1B
@@ -23,6 +23,9 @@ CODEC_TYPE_MAPPING = {
 
 
 class DecodeResult:
-    def __init__(self, reference: Reference, type: ReferenceType):
+    def __init__(self, reference: Union[Reference, str], type: ReferenceType):
         self.reference = reference
         self.type = type
+
+    def to_dict(self) -> Dict:
+        return {"reference": self.reference, "type": self.type}

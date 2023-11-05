@@ -1,7 +1,7 @@
 # .coveragerc to control coverage.py
 [run]
 branch = True
-source = swarm_cid_py
+source = swarm_cid
 # omit = bad_file.py
 
 [paths]
