@@ -1,5 +1,5 @@
 import binascii
-from typing import Union, Dict
+from typing import Dict, Union
 
 from eth_utils import keccak
 from multiformats_cid import CIDv0, CIDv1, from_string, make_cid

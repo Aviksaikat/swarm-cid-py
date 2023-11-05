@@ -1,5 +1,6 @@
 import pytest
-from swarm_cid import encode_reference, decode_cid, decode_feed_cid, decode_manifest_cid
+
+from swarm_cid import decode_cid, decode_feed_cid, decode_manifest_cid, encode_reference
 
 test_reference = "ca6357a08e317d15ec560fef34e4c45f8f19f01c372aa70f1da72bfa7f1a4338"
 test_manifest_cid = "bah5acgzazjrvpieogf6rl3cwb7xtjzgel6hrt4a4g4vkody5u4v7u7y2im4a"

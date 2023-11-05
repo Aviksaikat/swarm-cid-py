@@ -162,3 +162,4 @@ cython_debug/
 # custom 
 dev.sh
 __local__.json
+readme-ai.md

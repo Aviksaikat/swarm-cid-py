@@ -1,15 +1,15 @@
 from setuptools import find_packages, setup
 
 setup(
-    name="bee-py",
+    name="swarm-cid-py",
     version="0.1.0",
-    description="Python client library for connecting to Bee decentralised storage",
+    description="Utility library written in Python to convert Swarm hex references into Swarm CIDs",
     author="Saikat Karmakar",
     author_email="saikickkarma@protonmail.com",
     license="AGPL-3.0-or-later",
     long_description=open("README.md").read(),
     long_description_content_type="text/markdown",
-    url="https://github.com/alienrobotninja/bee-py",
+    url="https://github.com/Aviksaikat/swarm-cid-py",
     packages=find_packages(where="src"),
     package_dir={"": "src"},
     classifiers=[
