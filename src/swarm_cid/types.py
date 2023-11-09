@@ -1,10 +1,10 @@
 from typing import Dict, NewType, Union
 
 # Constants
-KECCAK_256_CODEC = 0x1B
-SWARM_NS_CODEC = 0xE4
-SWARM_MANIFEST_CODEC = 0xFA
-SWARM_FEED_CODEC = 0xFB
+KECCAK_256_CODEC = "0x1b"
+SWARM_NS_CODEC = "swarm-ns"
+SWARM_MANIFEST_CODEC = "swarm-manifest"
+SWARM_FEED_CODEC = "swarm-feed"
 REFERENCE_HEX_LENGTH = 64
 
 # Define a type alias for Reference
@@ -23,7 +23,7 @@ CODEC_TYPE_MAPPING = {
 
 
 class DecodeResult:
-    def __init__(self, reference: Union[Reference, str], type: ReferenceType):
+    def __init__(self, reference: Union[Reference, str], type: Union[ReferenceType, str]):
         self.reference = reference
         self.type = type
 

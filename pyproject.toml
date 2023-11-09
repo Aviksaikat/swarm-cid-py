@@ -10,6 +10,8 @@ packages = [{ include = "swarm_cid", from = "src" }]
 python = "^3.9"
 py-multiformats-cid = "^0.4.4"
 eth-ape = "^0.6.24"
+pymultihash = { git = "https://github.com/ivilata/pymultihash.git" }
+multiformats = { extras = ["full"], version = "^0.2.1" }
 
 [tool.pytest.project]
 name = "swarm_cid"

@@ -1,16 +1,26 @@
-import sys
+from .swarm_cid import (
+    bytesTohex,
+    decodeCid,
+    decodeFeedCid,
+    decodeManifestCid,
+    encodeFeedReference,
+    encodeManifestReference,
+    encodeReference,
+    hexToBytes,
+    parse,
+)
+from .types import DecodeResult, ReferenceType
 
-if sys.version_info[:2] >= (3, 8):
-    # TODO: Import directly (no need for conditional) when `python_requires = >= 3.8`
-    from importlib.metadata import PackageNotFoundError, version  # pragma: no cover
-else:
-    from importlib_metadata import PackageNotFoundError, version  # pragma: no cover
-
-try:
-    # Change here if project is renamed and does not equal the package name
-    dist_name = "swarm-cid-py"
-    __version__ = version(dist_name)
-except PackageNotFoundError:  # pragma: no cover
-    __version__ = "unknown"
-finally:
-    del version, PackageNotFoundError
+__all__ = [
+    "ReferenceType",
+    "DecodeResult",
+    "hexToBytes",
+    "bytesTohex",
+    "parse",
+    "encodeReference",
+    "encodeFeedReference",
+    "encodeManifestReference",
+    "decodeFeedCid",
+    "decodeManifestCid",
+    "decodeCid",
+]

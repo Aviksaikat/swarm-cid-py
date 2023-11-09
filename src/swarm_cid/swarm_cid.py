@@ -1,8 +1,8 @@
 import binascii
-from typing import Dict, Union
+from typing import Dict, Optional, Union
 
 from eth_utils import keccak
-from multiformats_cid import CIDv0, CIDv1, from_string, make_cid
+from multiformats_cid import CIDv0, CIDv1, from_string
 
 from .Exceptions import ReferenceError
 from .types import DecodeResult, Reference, ReferenceType
@@ -10,13 +10,13 @@ from .types import DecodeResult, Reference, ReferenceType
 # https://github.com/multiformats/multicodec/blob/master/table.csv
 
 # constants values on hex format which evaluates to ints
-KECCAK_256_CODEC = 0x1B
-SWARM_NS_CODEC = 0xE4
-SWARM_MANIFEST_CODEC = 0xFA
-SWARM_FEED_CODEC = 0xFB
+KECCAK_256_CODEC = "0x1b"
+SWARM_NS_CODEC = "swarm-ns"
+SWARM_MANIFEST_CODEC = "swarm-manifest"
+SWARM_FEED_CODEC = "swarm-feed"
 REFERENCE_HEX_LENGTH = 64
 
-TYPE_MAPPING: Dict[int, str] = {
+TYPE_MAPPING: Dict[str, str] = {
     SWARM_FEED_CODEC: ReferenceType.FEED,
     SWARM_MANIFEST_CODEC: ReferenceType.MANIFEST,
 }
@@ -45,14 +45,18 @@ def parse(source: str) -> Union[CIDv0, CIDv1]:
     return cid  # type: ignore
 
 
-def _encodeReference(ref: Union[str, Reference], codec: int) -> CIDv1:
+def _encodeReference(ref: Union[str, Reference], codec: str, version: Optional[int] = 1) -> CIDv1:
+    """
+    create a new CID object by default make it CIDv1.
+    """
     hash_bytes = hexToBytes(ref)
-    return make_cid(codec, keccak(hash_bytes))  # type: ignore
+
+    return CIDv1(codec, keccak(hash_bytes))
 
 
-def _decodeReference(ref: Union[CIDv0, CIDv1, str]) -> DecodeResult:
-    if isinstance(ref, str):
-        cid = parse(ref)
+def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
+    if isinstance(cid, str):
+        cid = parse(cid)
 
     reference = bytesTohex(cid.multihash)
     content_type = TYPE_MAPPING.get(cid.codec, "")  # type: ignore
@@ -61,12 +65,18 @@ def _decodeReference(ref: Union[CIDv0, CIDv1, str]) -> DecodeResult:
 
 
 def encodeReference(
-    ref: Union[str, Reference], type: ReferenceType
+    ref: Union[str, Reference], type: Optional[ReferenceType], version: Optional[int]
 ) -> Union[CIDv1, ReferenceError]:
-    if type == ReferenceType.FEED:
-        return _encodeReference(ref, SWARM_FEED_CODEC)
-    elif type == ReferenceType.MANIFEST:
-        return _encodeReference(ref, SWARM_MANIFEST_CODEC)
+    if type:
+        if type == ReferenceType.FEED:
+            return _encodeReference(ref, SWARM_FEED_CODEC, version)
+        elif type == ReferenceType.MANIFEST:
+            return _encodeReference(ref, SWARM_MANIFEST_CODEC, version)
+    else:
+        if version:
+            return _encodeReference(ref, version)  # type: ignore
+        else:
+            return _encodeReference(ref)  # type: ignore
     return ReferenceError("Unknown reference type.")
 
 
@@ -75,7 +85,7 @@ def encodeFeedReference(ref: Union[str, Reference]) -> CIDv1:
     Encode Swarm hex-encoded Reference into CID and sets Feed codec.
     @param ref
     """
-    return _encodeReference(ref, SWARM_FEED_CODEC)
+    return _encodeReference(ref, SWARM_FEED_CODEC)  # type: ignore
 
 
 def encodeManifestReference(ref: Union[str, Reference]) -> CIDv1:
@@ -83,7 +93,7 @@ def encodeManifestReference(ref: Union[str, Reference]) -> CIDv1:
     Encode Swarm hex-encoded Reference into CID and sets Manifest codec.
     @param ref
     """
-    return _encodeReference(ref, SWARM_MANIFEST_CODEC)
+    return _encodeReference(ref, SWARM_MANIFEST_CODEC)  # type: ignore
 
 
 def decodeFeedCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
