@@ -1,8 +1,8 @@
 import binascii
 from typing import Dict, Optional, Union
 
-from multiformats_cid import CIDv0, CIDv1, from_string
 from multiformats import multihash
+from multiformats_cid import CIDv0, CIDv1, from_string
 
 from .Exceptions import ReferenceError
 from .types import DecodeResult, Reference, ReferenceType

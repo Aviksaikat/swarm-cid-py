@@ -38,7 +38,7 @@ setup(
             "pytest-cov",
         ],
         "lint": [
-            "black>=23.9.1,<24",  # Auto-formatter and linter
+            "black>=23.11.0,<24",  # Auto-formatter and linter
             "mypy>=1.5.1,<2",  # Static type analyzer
             "types-PyYAML",  # Needed due to mypy typeshed
             "types-requests",  # Needed due to mypy typeshed
