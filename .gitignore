@@ -163,3 +163,4 @@ cython_debug/
 dev.sh
 __local__.json
 readme-ai.md
+test.py

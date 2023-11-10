@@ -1,8 +1,8 @@
 import binascii
 from typing import Dict, Optional, Union
 
-from eth_utils import keccak
 from multiformats_cid import CIDv0, CIDv1, from_string
+from multiformats import multihash
 
 from .Exceptions import ReferenceError
 from .types import DecodeResult, Reference, ReferenceType
@@ -10,7 +10,7 @@ from .types import DecodeResult, Reference, ReferenceType
 # https://github.com/multiformats/multicodec/blob/master/table.csv
 
 # constants values on hex format which evaluates to ints
-KECCAK_256_CODEC = "0x1b"
+KECCAK_256_CODEC = "keccak-256"
 SWARM_NS_CODEC = "swarm-ns"
 SWARM_MANIFEST_CODEC = "swarm-manifest"
 SWARM_FEED_CODEC = "swarm-feed"
@@ -46,12 +46,19 @@ def parse(source: str) -> Union[CIDv0, CIDv1]:
 
 
 def _encodeReference(ref: Union[str, Reference], codec: str, version: Optional[int] = 1) -> CIDv1:
-    """
-    create a new CID object by default make it CIDv1.
+    """Encode Swarm hex-encoded Reference into CID that has appropriate codec
+    set based on `type` parameter.
+
+    Args:
+        ref: Hex encoded Reference
+        codec: Codec to use
+
+    Returns:
+        CID
     """
     hash_bytes = hexToBytes(ref)
 
-    return CIDv1(codec, keccak(hash_bytes))
+    return CIDv1(codec, multihash.digest(hash_bytes, KECCAK_256_CODEC))
 
 
 def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:

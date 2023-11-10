@@ -18,7 +18,10 @@ def test_encode_and_decode_to_same_reference(
     assert cid.codec == SWARM_MANIFEST_CODEC
     assert cid.encode() == test_manifest_cid
 
-    assert decodeCid(cid).to_dict() == {"reference": test_reference, "type": ReferenceType.MANIFEST}
+    assert decodeCid(cid).to_dict() == {
+        "reference": cid.multihash.hex(),
+        "type": ReferenceType.MANIFEST,
+    }
 
 
 def test_encode_and_decode_with_base32_string_to_same_reference(test_reference):
