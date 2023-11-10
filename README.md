@@ -4,21 +4,31 @@
 <br>Swarm CID</h1>
 
 <p align="center">
-<img src="https://img.shields.io/badge/Python-3776AB.svg?style=for-the-badge&logo=Python&logoColor=white" alt="Python" />
+
+<img src="https://img.shields.io/github/stars/aviksaikat/swarm-cid-py.svg">
+<img src="https://img.shields.io/github/forks/aviksaikat/swarm-cid-py.svg">
+<img src="https://img.shields.io/github/issues/aviksaikat/swarm-cid-py.svg">
+
+<img src="https://img.shields.io/badge/python-3670A0?style=for-the-badge&logo=python&logoColor=ffffff" alt="Python" />
 <img src="https://img.shields.io/badge/Poetry-60A5FA.svg?style=for-the-badge&logo=Poetry&logoColor=white" alt="Poetry" />
-<img src="https://img.shields.io/badge/AIOHTTP-2C5BB4.svg?style=for-the-badge&logo=AIOHTTP&logoColor=white" alt="AIOHTTP" />
 
 <img src="https://img.shields.io/badge/GitHub%20Actions-2088FF.svg?style=for-the-badge&logo=GitHub-Actions&logoColor=white" alt="GitHub%20Actions" />
-<img src="https://img.shields.io/badge/pandas-150458.svg?style=for-the-badge&logo=pandas&logoColor=white" alt="pandas" />
 <img src="https://img.shields.io/badge/Pytest-0A9EDC.svg?style=for-the-badge&logo=Pytest&logoColor=white" alt="Pytest" />
 </p>
-<img src="https://img.shields.io/github/license/Aviksaikat/swarm-cid-py?style=for-the-badge&color=5D6D7E" alt="GitHub license" />
-<img src="https://img.shields.io/github/last-commit/Aviksaikat/swarm-cid-py?style=for-the-badge&color=5D6D7E" alt="git-last-commit" />
-<img src="https://img.shields.io/github/commit-activity/m/Aviksaikat/swarm-cid-py?style=for-the-badge&color=5D6D7E" alt="GitHub commit activity" />
-<img src="https://img.shields.io/github/languages/top/Aviksaikat/swarm-cid-py?style=for-the-badge&color=5D6D7E" alt="GitHub top language" />
+
+<p>
+<img src ="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"/>
+<img src ="https://img.shields.io/badge/imports-isort-17DE93.svg" alt="imports: isort"/>
+<img src = "https://www.mypy-lang.org/static/mypy_badge.svg">
+</p>
+
+<img src="https://img.shields.io/github/license/Aviksaikat/swarm-cid-py?style=for-the-badge&color=DEDE17" alt="GitHub license" />
+<img src="https://img.shields.io/github/last-commit/Aviksaikat/swarm-cid-py?style=for-the-badge&color=DEDE17" alt="git-last-commit" />
+<img src="https://img.shields.io/github/commit-activity/m/Aviksaikat/swarm-cid-py?style=for-the-badge&color=DEDE17" alt="GitHub commit activity" />
+<img src="https://img.shields.io/github/languages/top/Aviksaikat/swarm-cid-py?style=for-the-badge&color=DEDE17" alt="GitHub top language" />
 </div>
 
-______________________________________________________________________
+---
 
 ## 📖 Table of Contents
 
@@ -31,7 +41,7 @@ ______________________________________________________________________
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
-______________________________________________________________________
+---
 
 ## 📍 Api
 
@@ -87,7 +97,7 @@ Encodes a manifest reference string into a CID.
 
 - reference: The manifest reference string to encode.
 
-______________________________________________________________________
+---
 
 ## 🚀 Getting Started
 
@@ -97,7 +107,7 @@ ______________________________________________________________________
 py-multiformats-cid
 ```
 
-______________________________________________________________________
+---
 
 ### 🔧 Installation
 
@@ -105,7 +115,7 @@ ______________________________________________________________________
 pip install swarm_cid_py
 ```
 
-______________________________________________________________________
+---
 
 ### 🤖 Running swarm-cid-py
 
@@ -121,7 +131,7 @@ bah5acgzajskjpfgwc4ry3euo6hofitxaps647vvzi3ssal5anrgtecenpzuq
 '4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69', 'type': 'manifest'}
 ```
 
-______________________________________________________________________
+---
 
 ### 🧪 Tests
 
@@ -129,7 +139,7 @@ ______________________________________________________________________
 pytest tests/test_swarm_cid.py
 ```
 
-______________________________________________________________________
+---
 
 ## 🤝 Contributing
 
@@ -168,7 +178,7 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 </details>
 
-______________________________________________________________________
+---
 
 ## 📄 License
 
@@ -176,4 +186,4 @@ This project is protected under the [BSD-3-Clause](./LICENSE) License.
 
 [**Return**](#Top)
 
-______________________________________________________________________
+---
