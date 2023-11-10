@@ -58,14 +58,18 @@ def _encodeReference(ref: Union[str, Reference], codec: str, version: Optional[i
     """
     hash_bytes = hexToBytes(ref)
 
-    return CIDv1(codec, multihash.digest(hash_bytes, KECCAK_256_CODEC))
+    _hash = multihash.digest(hash_bytes, KECCAK_256_CODEC).hex()
+    new_hash = hexToBytes(_hash[:4] + ref)
+
+    return CIDv1(codec, new_hash)
 
 
 def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
     if isinstance(cid, str):
         cid = parse(cid)
 
-    reference = bytesTohex(cid.multihash)
+    # remove the hashtype + lengh i.e. first 4 bytes
+    reference = bytesTohex(cid.multihash)[4:]
     content_type = TYPE_MAPPING.get(cid.codec, "")  # type: ignore
 
     return DecodeResult(reference, content_type)

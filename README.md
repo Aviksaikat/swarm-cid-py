@@ -18,7 +18,7 @@
 <img src="https://img.shields.io/github/languages/top/Aviksaikat/swarm-cid-py?style=for-the-badge&color=5D6D7E" alt="GitHub top language" />
 </div>
 
----
+______________________________________________________________________
 
 ## 📖 Table of Contents
 
@@ -32,13 +32,13 @@
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
----
+______________________________________________________________________
 
 ## 📍 Overview
 
 Utility library written in Python to convert Swarm hex references into Swarm CIDs
 
----
+______________________________________________________________________
 
 ## 🚀 Getting Started
 
@@ -48,7 +48,7 @@ Utility library written in Python to convert Swarm hex references into Swarm CID
 py-multiformats-cid
 ```
 
----
+______________________________________________________________________
 
 ### 🔧 Installation
 
@@ -56,7 +56,7 @@ py-multiformats-cid
 pip install swarm_cid_py
 ```
 
----
+______________________________________________________________________
 
 ### 🤖 Running swarm-cid-py
 
@@ -64,7 +64,7 @@ pip install swarm_cid_py
 
 ```
 
----
+______________________________________________________________________
 
 ### 🧪 Tests
 
@@ -72,7 +72,7 @@ pip install swarm_cid_py
 
 ```
 
----
+______________________________________________________________________
 
 ## 🤝 Contributing
 
@@ -111,7 +111,7 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 </details>
 
----
+______________________________________________________________________
 
 ## 📄 License
 
@@ -119,4 +119,4 @@ This project is protected under the [BSD-3-Clause](./LICENSE) License.
 
 [**Return**](#Top)
 
----
+______________________________________________________________________

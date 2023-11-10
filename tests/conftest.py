@@ -2,14 +2,14 @@ import pytest
 
 
 @pytest.fixture
-def test_reference():
+def test_swarm_reference():
     return "4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69"
 
 
 @pytest.fixture
-def test_manifest_cid():
+def test_swarm_manifest_cid():
     # return "bah5acgzazjrvpieogf6rl3cwb7xtjzgel6hrt4a4g4vkody5u4v7u7y2im4a"
-    return "bah5acgzaukog5d75a3uftpeeikfy35gnw2mmvulh4ktwebzfbsbqxskto6ha"
+    return "bah5acgzajskjpfgwc4ry3euo6hofitxaps647vvzi3ssal5anrgtecenpzuq"
 
 
 @pytest.fixture

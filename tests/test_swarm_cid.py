@@ -11,15 +11,15 @@ from swarm_cid import (
 
 
 def test_encode_and_decode_to_same_reference(
-    test_reference, test_manifest_cid, SWARM_MANIFEST_CODEC
+    test_swarm_reference, test_swarm_manifest_cid, SWARM_MANIFEST_CODEC
 ):
-    cid = encodeReference(test_reference, ReferenceType.MANIFEST, 1)
+    cid = encodeReference(test_swarm_reference, ReferenceType.MANIFEST, 1)
 
     assert cid.codec == SWARM_MANIFEST_CODEC
-    assert cid.encode() == test_manifest_cid
+    assert cid.encode().decode() == test_swarm_manifest_cid
 
     assert decodeCid(cid).to_dict() == {
-        "reference": cid.multihash.hex(),
+        "reference": test_swarm_reference,
         "type": ReferenceType.MANIFEST,
     }
 
