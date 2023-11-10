@@ -39,6 +39,7 @@ setup(
         ],
         "lint": [
             "black>=23.11.0,<24",  # Auto-formatter and linter
+            "isort>=5.12.0,<6",
             "mypy>=1.5.1,<2",  # Static type analyzer
             "types-PyYAML",  # Needed due to mypy typeshed
             "types-requests",  # Needed due to mypy typeshed
