@@ -1,6 +1,5 @@
 from setuptools import find_packages, setup  # type: ignore
 
-
 setup(
     name="swarm-cid-py",
     version="0.1.0",
