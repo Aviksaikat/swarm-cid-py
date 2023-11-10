@@ -1,8 +1,8 @@
 import binascii
 from typing import Dict, Optional, Union
 
-from multiformats import multihash
-from multiformats_cid import CIDv0, CIDv1, from_string
+from multiformats import multihash  # type: ignore
+from multiformats_cid import CIDv0, CIDv1, from_string  # type: ignore
 
 from .Exceptions import ReferenceError
 from .types import DecodeResult, Reference, ReferenceType
@@ -70,13 +70,13 @@ def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
 
     # remove the hashtype + lengh i.e. first 4 bytes
     reference = bytesTohex(cid.multihash)[4:]
-    content_type = TYPE_MAPPING.get(cid.codec, "")  # type: ignore
+    content_type = TYPE_MAPPING.get(cid.codec, None)  # type: ignore
 
-    return DecodeResult(reference, content_type)
+    return DecodeResult(reference, content_type)  # type: ignore
 
 
 def encodeReference(
-    ref: Union[str, Reference], type: Optional[ReferenceType], version: Optional[int]
+    ref: Union[str, Reference], type: Optional[ReferenceType], version: Optional[int] = 1
 ) -> Union[CIDv1, ReferenceError]:
     if type:
         if type == ReferenceType.FEED:
@@ -85,9 +85,7 @@ def encodeReference(
             return _encodeReference(ref, SWARM_MANIFEST_CODEC, version)
     else:
         if version:
-            return _encodeReference(ref, version)  # type: ignore
-        else:
-            return _encodeReference(ref)  # type: ignore
+            return _encodeReference(ref=ref, version=version)  # type: ignore
     return ReferenceError("Unknown reference type.")
 
 
@@ -96,7 +94,7 @@ def encodeFeedReference(ref: Union[str, Reference]) -> CIDv1:
     Encode Swarm hex-encoded Reference into CID and sets Feed codec.
     @param ref
     """
-    return _encodeReference(ref, SWARM_FEED_CODEC)  # type: ignore
+    return _encodeReference(ref=ref, codec=SWARM_FEED_CODEC)  # type: ignore
 
 
 def encodeManifestReference(ref: Union[str, Reference]) -> CIDv1:
@@ -104,7 +102,7 @@ def encodeManifestReference(ref: Union[str, Reference]) -> CIDv1:
     Encode Swarm hex-encoded Reference into CID and sets Manifest codec.
     @param ref
     """
-    return _encodeReference(ref, SWARM_MANIFEST_CODEC)  # type: ignore
+    return _encodeReference(ref=ref, codec=SWARM_MANIFEST_CODEC)  # type: ignore
 
 
 def decodeFeedCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:

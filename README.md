@@ -23,20 +23,69 @@ ______________________________________________________________________
 ## 📖 Table of Contents
 
 - [📖 Table of Contents](#-table-of-contents)
-- [📍 Overview](#-overview)
-- [📦 Features](#-features)
+- [📍 API](#-Api)
 - [🚀 Getting Started](#-getting-started)
   - [🔧 Installation](#-installation)
-  - [🤖 Running swarm-cid-js](#-running-swarm-cid-js)
+  - [🤖 Running swarm-cid-py](#-running-swarm-cid-py)
   - [🧪 Tests](#-tests)
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
 ______________________________________________________________________
 
-## 📍 Overview
+## 📍 Api
 
-Utility library written in Python to convert Swarm hex references into Swarm CIDs
+Utility library written in Python to convert Swarm hex references into Swarm CIDs.
+
+The swarm-cid library provides the following functions:
+
+`encodeReference(reference, type, version)`
+
+Encodes a reference string into a CID.
+
+- reference: The reference string to encode.
+- type: The type of the reference (either ReferenceType.MANIFEST or ReferenceType.FEED).
+- version: The version of the CID (either 1 or 2).
+  Returns a CID string.
+
+`decodeCid(cid)`
+
+Decodes a CID string into a dictionary containing information about the underlying data.
+
+- cid: The CID string to decode.
+
+Returns a dictionary with the
+following keys:
+
+- reference: The reference string extracted from the CID.
+- type: The type of the reference (either ReferenceType.MANIFEST or ReferenceType.FEED).
+
+`decodeFeedCid(cid)`
+
+Decodes a CID string into a feed reference string.
+
+- cid: The CID string to decode.
+  Returns a feed reference string.
+
+`decodeManifestCid(cid)`
+
+Decodes a CID string into a manifest reference string.
+
+- cid: The CID string to decode.
+  Returns a manifest reference string.
+
+`encodeFeedReference(reference)`
+
+Encodes a feed reference string into a CID.
+
+- reference: The feed reference string to encode.
+  Returns a CID string.
+
+`encodeManifestReference(reference)`
+
+Encodes a manifest reference string into a CID.
+
+- reference: The manifest reference string to encode.
 
 ______________________________________________________________________
 
@@ -60,8 +109,16 @@ ______________________________________________________________________
 
 ### 🤖 Running swarm-cid-py
 
-```sh
-
+```py
+>>> from swarm_cid import encodeReference, decodeCid
+>>> reference = "4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69"
+>>> cid = encodeReference(reference, ReferenceType.MANIFEST, 1)
+>>> print(str(cid))
+bah5acgzajskjpfgwc4ry3euo6hofitxaps647vvzi3ssal5anrgtecenpzuq
+>>> decoded_cid = decodeCid(cid)
+>>> print(decoded_cid.to_dict())
+{'reference':
+'4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69', 'type': 'manifest'}
 ```
 
 ______________________________________________________________________
@@ -69,7 +126,7 @@ ______________________________________________________________________
 ### 🧪 Tests
 
 ```sh
-
+pytest tests/test_swarm_cid.py
 ```
 
 ______________________________________________________________________
@@ -88,24 +145,24 @@ Contributions are welcome! Here are several ways you can contribute:
 <summary>Click to expand</summary>
 
 1. **Fork the Repository**: Start by forking the project repository to your GitHub account.
-1. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
+2. **Clone Locally**: Clone the forked repository to your local machine using a Git client.
    ```sh
    git clone <your-forked-repo-url>
    ```
-1. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
+3. **Create a New Branch**: Always work on a new branch, giving it a descriptive name.
    ```sh
    git checkout -b new-feature-x
    ```
-1. **Make Your Changes**: Develop and test your changes locally.
-1. **Commit Your Changes**: Commit with a clear and concise message describing your updates.
+4. **Make Your Changes**: Develop and test your changes locally.
+5. **Commit Your Changes**: Commit with a clear and concise message describing your updates.
    ```sh
    git commit -m 'Implemented new feature x.'
    ```
-1. **Push to GitHub**: Push the changes to your forked repository.
+6. **Push to GitHub**: Push the changes to your forked repository.
    ```sh
    git push origin new-feature-x
    ```
-1. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
+7. **Submit a Pull Request**: Create a PR against the original project repository. Clearly describe the changes and their motivations.
 
 Once your PR is reviewed and approved, it will be merged into the main branch.
 

@@ -29,9 +29,9 @@ sys.path.insert(0, os.path.join(__location__, "../src"))
 # Additionally it helps us to avoid running apidoc manually
 
 try:  # for Sphinx >= 1.7
-    from sphinx.ext import apidoc
+    from sphinx.ext import apidoc  # type: ignore
 except ImportError:
-    from sphinx import apidoc
+    from sphinx import apidoc  # type: ignore
 
 output_dir = os.path.join(__location__, "api")
 module_dir = os.path.join(__location__, "../src/swarm_cid")
@@ -99,7 +99,7 @@ copyright = "2023, SAIKAT KARMAKAR"
 # If you don’t need the separation provided between version and release,
 # just set them both to the same value.
 try:
-    from swarm_cid import __version__ as version
+    from swarm_cid import __version__ as version  # type: ignore
 except ImportError:
     version = ""
 
@@ -231,7 +231,7 @@ htmlhelp_basename = "swarm-cid-py-doc"
 
 # -- Options for LaTeX output ------------------------------------------------
 
-latex_elements = {
+latex_elements = {  # type: ignore
     # The paper size ("letterpaper" or "a4paper").
     # "papersize": "letterpaper",
     # The font size ("10pt", "11pt" or "12pt").

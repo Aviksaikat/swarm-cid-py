@@ -13,6 +13,11 @@ def test_swarm_manifest_cid():
 
 
 @pytest.fixture
+def test_swarm_feed_cid():
+    return "bah5qcgzajskjpfgwc4ry3euo6hofitxaps647vvzi3ssal5anrgtecenpzuq"
+
+
+@pytest.fixture
 def test_feed_cid():
     return "bah5qcgzazjrvpieogf6rl3cwb7xtjzgel6hrt4a4g4vkody5u4v7u7y2im4a"
 
