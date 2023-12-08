@@ -22,7 +22,7 @@ TYPE_MAPPING: Dict[str, str] = {
 }
 
 
-def hexToBytes(ref: str) -> bytes:
+def hex_to_bytes(ref: str) -> bytes:
     """
     converts a string to a byte array
     """
@@ -32,7 +32,7 @@ def hexToBytes(ref: str) -> bytes:
     return binascii.unhexlify(ref)
 
 
-def bytesTohex(ref: bytes) -> str:
+def bytes_to_hex(ref: bytes) -> str:
     return binascii.hexlify(ref).decode("utf8")
 
 
@@ -45,7 +45,7 @@ def parse(source: str) -> Union[CIDv0, CIDv1]:
     return cid  # type: ignore
 
 
-def _encodeReference(ref: Union[str, Reference], codec: str, version: Optional[int] = 1) -> CIDv1:
+def _encode_reference(ref: Union[str, Reference], codec: str) -> CIDv1:
     """Encode Swarm hex-encoded Reference into CID that has appropriate codec
     set based on `type` parameter.
 
@@ -56,10 +56,10 @@ def _encodeReference(ref: Union[str, Reference], codec: str, version: Optional[i
     Returns:
         CID
     """
-    hash_bytes = hexToBytes(ref)
+    hash_bytes = hex_to_bytes(ref)
 
     _hash = multihash.digest(hash_bytes, KECCAK_256_CODEC).hex()
-    new_hash = hexToBytes(_hash[:4] + ref)
+    new_hash = hex_to_bytes(_hash[:4] + ref)
 
     return CIDv1(codec, new_hash)
 
@@ -69,43 +69,43 @@ def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
         cid = parse(cid)
 
     # remove the hashtype + lengh i.e. first 4 bytes
-    reference = bytesTohex(cid.multihash)[4:]
+    reference = bytes_to_hex(cid.multihash)[4:]
     content_type = TYPE_MAPPING.get(cid.codec, None)  # type: ignore
 
     return DecodeResult(reference, content_type)  # type: ignore
 
 
-def encodeReference(
+def encode_reference(
     ref: Union[str, Reference], type: Optional[ReferenceType], version: Optional[int] = 1
 ) -> Union[CIDv1, ReferenceError]:
     if type:
         if type == ReferenceType.FEED:
-            return _encodeReference(ref, SWARM_FEED_CODEC, version)
+            return _encode_reference(ref, SWARM_FEED_CODEC)
         elif type == ReferenceType.MANIFEST:
-            return _encodeReference(ref, SWARM_MANIFEST_CODEC, version)
+            return _encode_reference(ref, SWARM_MANIFEST_CODEC)
     else:
         if version:
-            return _encodeReference(ref=ref, version=version)  # type: ignore
+            return _encode_reference(ref=ref)  # type: ignore
     return ReferenceError("Unknown reference type.")
 
 
-def encodeFeedReference(ref: Union[str, Reference]) -> CIDv1:
+def encode_feed_reference(ref: Union[str, Reference]) -> CIDv1:
     """
     Encode Swarm hex-encoded Reference into CID and sets Feed codec.
     @param ref
     """
-    return _encodeReference(ref=ref, codec=SWARM_FEED_CODEC)  # type: ignore
+    return _encode_reference(ref=ref, codec=SWARM_FEED_CODEC)  # type: ignore
 
 
-def encodeManifestReference(ref: Union[str, Reference]) -> CIDv1:
+def encode_manifest_reference(ref: Union[str, Reference]) -> CIDv1:
     """
     Encode Swarm hex-encoded Reference into CID and sets Manifest codec.
     @param ref
     """
-    return _encodeReference(ref=ref, codec=SWARM_MANIFEST_CODEC)  # type: ignore
+    return _encode_reference(ref=ref, codec=SWARM_MANIFEST_CODEC)  # type: ignore
 
 
-def decodeFeedCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
+def decode_feed_cid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
     """
     Function to decode Feed CID (both from string or CID instance) into hex
     encoded Swarm reference.
@@ -121,7 +121,7 @@ def decodeFeedCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
     return result.reference
 
 
-def decodeManifestCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
+def decode_manifest_cid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
     """
     Function to decode Manifest CID (both from string or CID instance) into
     hex encoded Swarm reference.
@@ -137,7 +137,7 @@ def decodeManifestCid(cid: Union[CIDv0, CIDv1, str]) -> Union[Reference, str]:
     return result.reference
 
 
-def decodeCid(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
+def decode_cid(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
     """
     * Decode CID or base encoded CID string into DecodeResult interface.
     * Does not throw exception if the codec was not Swarm related. In that

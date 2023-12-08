@@ -2,33 +2,33 @@ import pytest
 
 from swarm_cid import (
     ReferenceType,
-    decodeCid,
-    decodeFeedCid,
-    decodeManifestCid,
-    encodeFeedReference,
-    encodeReference,
+    decode_cid,
+    decode_feed_cid,
+    decode_manifest_cid,
+    encode_feed_reference,
+    encode_reference,
 )
 
 
 def test_encode_and_decode_to_same_reference(
     test_swarm_reference, test_swarm_manifest_cid, SWARM_MANIFEST_CODEC
 ):
-    cid = encodeReference(test_swarm_reference, ReferenceType.MANIFEST, 1)
+    cid = encode_reference(test_swarm_reference, ReferenceType.MANIFEST)
 
     assert cid.codec == SWARM_MANIFEST_CODEC
     assert cid.encode().decode() == test_swarm_manifest_cid
 
-    assert decodeCid(cid).to_dict() == {
+    assert decode_cid(cid).to_dict() == {
         "reference": test_swarm_reference,
         "type": ReferenceType.MANIFEST,
     }
 
 
 def test_encode_and_decode_with_base32_string_to_same_reference(test_swarm_reference):
-    cid = encodeReference(test_swarm_reference, ReferenceType.FEED)
+    cid = encode_reference(test_swarm_reference, ReferenceType.FEED)
     cid_string = str(cid)
 
-    assert decodeCid(cid_string).to_dict() == {
+    assert decode_cid(cid_string).to_dict() == {
         "reference": test_swarm_reference,
         "type": ReferenceType.FEED,
     }
@@ -37,49 +37,49 @@ def test_encode_and_decode_with_base32_string_to_same_reference(test_swarm_refer
 def test_encode_manifest_and_decode_with_base32_string_to_same_reference(
     test_swarm_reference, test_swarm_manifest_cid, SWARM_MANIFEST_CODEC
 ):
-    cid = encodeReference(test_swarm_reference, ReferenceType.MANIFEST)
+    cid = encode_reference(test_swarm_reference, ReferenceType.MANIFEST)
     cid_string = str(cid)
 
     assert cid.codec == SWARM_MANIFEST_CODEC
     assert str(cid) == test_swarm_manifest_cid
 
-    assert decodeCid(cid_string).to_dict() == {
+    assert decode_cid(cid_string).to_dict() == {
         "reference": test_swarm_reference,
         "type": ReferenceType.MANIFEST,
     }
-    assert decodeManifestCid(cid_string) == test_swarm_reference
+    assert decode_manifest_cid(cid_string) == test_swarm_reference
 
     with pytest.raises(ValueError):
-        decodeFeedCid(cid_string)
+        decode_feed_cid(cid_string)
 
 
 def test_encode_feed_and_decode_with_base32_string_to_same_reference(
     test_swarm_reference, test_swarm_feed_cid, SWARM_FEED_CODEC
 ):
-    cid = encodeFeedReference(test_swarm_reference)
+    cid = encode_feed_reference(test_swarm_reference)
     cid_string = str(cid)
 
     assert cid.codec == SWARM_FEED_CODEC
     assert cid.encode().decode() == test_swarm_feed_cid
 
-    assert decodeCid(cid_string).to_dict() == {
+    assert decode_cid(cid_string).to_dict() == {
         "reference": test_swarm_reference,
         "type": ReferenceType.FEED,
     }
-    assert decodeFeedCid(cid_string) == test_swarm_reference
+    assert decode_feed_cid(cid_string) == test_swarm_reference
     with pytest.raises(ValueError):
-        decodeManifestCid(cid_string)
+        decode_manifest_cid(cid_string)
 
 
-def test_decodeCid_with_incompatible_codec(cid_v1_with_dag_pb, cid_v1_with_dag_pb_reference):
-    assert decodeCid(cid_v1_with_dag_pb).to_dict() == {
+def test_decode_cid_with_incompatible_codec(cid_v1_with_dag_pb, cid_v1_with_dag_pb_reference):
+    assert decode_cid(cid_v1_with_dag_pb).to_dict() == {
         "reference": cid_v1_with_dag_pb_reference,
         "type": None,
     }
 
 
-def test_decodeCid_with_specific_codec(cid_v1_with_dag_pb):
+def test_decode_cid_with_specific_codec(cid_v1_with_dag_pb):
     with pytest.raises(ValueError):
-        decodeFeedCid(cid_v1_with_dag_pb)
+        decode_feed_cid(cid_v1_with_dag_pb)
     with pytest.raises(ValueError):
-        decodeManifestCid(cid_v1_with_dag_pb)
+        decode_manifest_cid(cid_v1_with_dag_pb)

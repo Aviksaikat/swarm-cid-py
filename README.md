@@ -30,7 +30,7 @@
 <img src="https://img.shields.io/github/languages/top/Aviksaikat/swarm-cid-py?style=for-the-badge&color=DEDE17" alt="GitHub top language" />
 </div>
 
-______________________________________________________________________
+---
 
 ## 📖 Table of Contents
 
@@ -43,7 +43,7 @@ ______________________________________________________________________
 - [🤝 Contributing](#-contributing)
 - [📄 License](#-license)
 
-______________________________________________________________________
+---
 
 ## 📍 Api
 
@@ -51,7 +51,7 @@ Utility library written in Python to convert Swarm hex references into Swarm CID
 
 The swarm-cid library provides the following functions:
 
-`encodeReference(reference, type, version)`
+`encode_reference(reference, type, version)`
 
 Encodes a reference string into a CID.
 
@@ -60,7 +60,7 @@ Encodes a reference string into a CID.
 - version: The version of the CID (either 1 or 2).
   Returns a CID string.
 
-`decodeCid(cid)`
+`decode_cid(cid)`
 
 Decodes a CID string into a dictionary containing information about the underlying data.
 
@@ -72,34 +72,34 @@ following keys:
 - reference: The reference string extracted from the CID.
 - type: The type of the reference (either ReferenceType.MANIFEST or ReferenceType.FEED).
 
-`decodeFeedCid(cid)`
+`decode_feed_cid(cid)`
 
 Decodes a CID string into a feed reference string.
 
 - cid: The CID string to decode.
   Returns a feed reference string.
 
-`decodeManifestCid(cid)`
+`decode_manifest_cid(cid)`
 
 Decodes a CID string into a manifest reference string.
 
 - cid: The CID string to decode.
   Returns a manifest reference string.
 
-`encodeFeedReference(reference)`
+`encode_feed_reference(reference)`
 
 Encodes a feed reference string into a CID.
 
 - reference: The feed reference string to encode.
   Returns a CID string.
 
-`encodeManifestReference(reference)`
+`encode_manifest_reference(reference)`
 
 Encodes a manifest reference string into a CID.
 
 - reference: The manifest reference string to encode.
 
-______________________________________________________________________
+---
 
 ## 🚀 Getting Started
 
@@ -109,7 +109,7 @@ ______________________________________________________________________
 py-multiformats-cid
 ```
 
-______________________________________________________________________
+---
 
 ### 🔧 Installation
 
@@ -117,23 +117,23 @@ ______________________________________________________________________
 pip install swarm_cid_py
 ```
 
-______________________________________________________________________
+---
 
 ### 🤖 Running swarm-cid-py
 
 ```py
->>> from swarm_cid import encodeReference, decodeCid
+>>> from swarm_cid import encode_reference, decode_cid
 >>> reference = "4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69"
->>> cid = encodeReference(reference, ReferenceType.MANIFEST, 1)
+>>> cid = encode_reference(reference, ReferenceType.MANIFEST, 1)
 >>> print(str(cid))
 bah5acgzajskjpfgwc4ry3euo6hofitxaps647vvzi3ssal5anrgtecenpzuq
->>> decoded_cid = decodeCid(cid)
+>>> decoded_cid = decode_cid(cid)
 >>> print(decoded_cid.to_dict())
 {'reference':
 '4c949794d617238d928ef1dc544ee07cbdcfd6b946e5202fa06c4d32088d7e69', 'type': 'manifest'}
 ```
 
-______________________________________________________________________
+---
 
 ### 🧪 Tests
 
@@ -141,7 +141,7 @@ ______________________________________________________________________
 pytest tests/test_swarm_cid.py
 ```
 
-______________________________________________________________________
+---
 
 ## 🤝 Contributing
 
@@ -180,7 +180,7 @@ Once your PR is reviewed and approved, it will be merged into the main branch.
 
 </details>
 
-______________________________________________________________________
+---
 
 ## 📄 License
 
@@ -188,4 +188,4 @@ This project is protected under the [BSD-3-Clause](./LICENSE) License.
 
 [**Return**](#Top)
 
-______________________________________________________________________
+---
