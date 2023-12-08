@@ -19,6 +19,7 @@
 </p>
 
 <p align="center">
+ <img src = "https://img.shields.io/badge/python-3.9+-blue.svg">
   <img src ="https://img.shields.io/badge/code%20style-black-000000.svg" alt="Code style: black"/>
   <img src ="https://img.shields.io/badge/imports-isort-17DE93.svg" alt="imports: isort"/>
   <img src = "https://www.mypy-lang.org/static/mypy_badge.svg">
