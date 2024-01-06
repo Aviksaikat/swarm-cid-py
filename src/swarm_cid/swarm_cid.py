@@ -76,7 +76,9 @@ def _decodeReference(cid: Union[CIDv0, CIDv1, str]) -> DecodeResult:
 
 
 def encode_reference(
-    ref: Union[str, Reference], type: Optional[ReferenceType], version: Optional[int] = 1
+    ref: Union[str, Reference],
+    type: Optional[Union[ReferenceType, str]],
+    version: Optional[int] = 1,
 ) -> Union[CIDv1, ReferenceError]:
     if type:
         if type == ReferenceType.FEED:
